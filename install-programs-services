@@ -1,0 +1,24 @@
+#!/bin/bash
+#Install git
+apt install git
+
+#Install Net Core
+wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+dpkg -i packages-microsoft-prod.deb
+apt install apt-transport-https
+apt update
+apt install dotnet-sdk-2.1
+
+# Install docker
+apt-get update
+apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+apt update
+apt install -y docker-ce
+usermod -aG docker $USER
+
+# Install docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
